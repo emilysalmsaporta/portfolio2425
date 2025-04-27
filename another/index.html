@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Bitter:ital,wght@1,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    :root {
+      overscroll-behavior: none;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+  height: 100%;
+  background-image: url('img/playa.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* important! */
+  font-family: "Luxurious Roman", serif;
+}
+
+
+
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: rgb(255, 255, 255);
+    }
+
+    h1 {
+      font-family: "Luxurious Roman", serif;
+      font-size: 2.5rem;
+      color: black;
+    }
+
+    .projets {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .fixed {
+      position: fixed;
+    }
+
+    .projets.fixed {
+      top: 100px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      padding: 48px;
+      overflow-y: auto;
+    }
+
+    .close {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      font-size: 48px;
+      background: #000;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      text-align: center;
+      line-height: 48px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .wrap {
+      width: 100%;
+    }
+
+    .fiche {
+      margin: 0 auto;
+      max-width: 700px;
+      background: white;
+      color: black;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .fiche img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* --- Card Flip Animation Styles --- */
+    .card {
+      width: 100%;
+      height: 500px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .logo {
+  font-family: "Luxurious Roman", serif;
+  font-size: 3rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow:
+    0 0 5px #ffffff,
+    0 0 10px #ffffff,
+    0 0 20px #ffa8df,
+    0 0 30px #ffa8df,
+    0 0 40px #ffa8df;
+}
+
+
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .card-front {
+      background-color: #fbf8f2;
+    }
+
+      .card-back {
+  background-color: #000000; /* dark background */
+  color: white; /* text color */
+  transform: rotateY(180deg);
+  text-align: center;
+  font-size: 8rem; /* BIG question mark */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      object-fit: cover;
+    }
+
+    .card h1 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  text-align: center;
+  max-height: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.big-question {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 7rem;
+  color: white;
+  z-index: 2;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.frame-questions {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  padding: 20px;
+  z-index: 1;
+}
+
+.frame-questions span {
+  font-size: 1.5rem;
+  color: white;
+  opacity: 0.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frame-questions .middle {
+  opacity: 0;
+}
+
+
+.card p {
+  font-size: 1rem;
+  font-family: "Bitter", serif;
+  text-align: center;
+  padding: 0 10px;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="logo">Emily Saporta</h1>
+  </header>
+
+  <div class="projets"></div>
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.7.0"></script>
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>
